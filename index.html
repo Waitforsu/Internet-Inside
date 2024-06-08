@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Station</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .result {
+            margin-top: 20px;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Mobile Station</h1>
+        <!-- Start Mobile Button -->
+        <form action="{{ url_for('start_mobile') }}" method="post">
+            <button class="button" type="submit">Start Mobile</button>
+        </form>
+        <!-- Stop Mobile Button -->
+        <form action="{{ url_for('stop_mobile') }}" method="post">
+            <button class="button" type="submit">Stop Mobile</button>
+        </form>
+        <!-- Display Mobile Started/Stopped Information -->
+        {% if mobile_started %}
+        <div class="result">
+            <h2>Mobile started successfully!</h2>
+        </div>
+        {% elif mobile_stopped %}
+        <div class="result">
+            <h2>Mobile stopped successfully!</h2>
+        </div>
+        {% endif %}
+        <!-- Speed Test Form -->
+        <h1>Speed Test</h1>
+        <form action="{{ url_for('start_speed_test') }}" method="post">
+            <button class="button" type="submit">Start Speed Test</button>
+        </form>
+        {% if speed_test_result %}
+        <div class="result">
+            <h2>Speed Test Result:</h2>
+            <pre>{{ speed_test_result }}</pre>
+        </div>
+        {% endif %}
+        <!-- Ping Form -->
+        <h1>Ping</h1>
+        <form action="{{ url_for('ping') }}" method="post">
+            <label for="target">Enter target IP address or domain:</label><br>
+            <input type="text" id="target" name="target"><br><br>
+            <button class="button" type="submit">Ping</button>
+        </form>
+        {% if ping_result %}
+        <div class="result">
+            <h2>Ping Result:</h2>
+            <pre>{{ ping_result }}</pre>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

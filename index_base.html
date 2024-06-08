@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base Station</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+        .result {
+            margin-top: 20px;
+            white-space: pre-line;
+        }
+        .heading {
+            margin-top: 40px;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .message {
+            color: green;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Base Station</h1>
+        <!-- Start Base Button -->
+        <form action="{{ url_for('run_client_program') }}" method="post">
+            <button class="button" type="submit">Start Base</button>
+        </form>
+        <!-- Stop Base Button -->
+        <form action="{{ url_for('halt_client_program') }}" method="post">
+            <button class="button" type="submit">Stop Base</button>
+        </form>
+        <!-- Display Base Started/Stopped Information -->
+        {% if message %}
+        <div class="message">
+            {{ message }}
+        </div>
+        {% endif %}
+        <!-- Speed Test Section -->
+        <div class="heading">Speed Test</div>
+        <form action="{{ url_for('start_speed_test') }}" method="post">
+            <button class="button" type="submit">Start Speed Test</button>
+        </form>
+        {% if speed_test_result %}
+        <div class="result">
+            <h2>Speed Test Result:</h2>
+            <pre>{{ speed_test_result }}</pre>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
